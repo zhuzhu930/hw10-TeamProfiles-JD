@@ -1,0 +1,23 @@
+{
+  "name": "hw10-teamprofiles-jd",
+  "version": "1.0.0",
+  "description": "Node.js command-line application to generate team profiles.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuzhu930/hw10-TeamProfiles-JD.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhuzhu930/hw10-TeamProfiles-JD/issues"
+  },
+  "homepage": "https://github.com/zhuzhu930/hw10-TeamProfiles-JD#readme",
+  "dependencies": {
+    "inquire": "^0.4.8",
+    "jest": "^28.0.3"
+  }
+}
