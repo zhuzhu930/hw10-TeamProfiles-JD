@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/zhuzhu930/hw10-TeamProfiles-JD#readme",
   "dependencies": {
+    "bootstrap-icons": "^1.8.1",
     "inquire": "^0.4.8",
     "jest": "^28.0.3"
   }
