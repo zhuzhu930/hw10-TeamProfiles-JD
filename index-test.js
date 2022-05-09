@@ -11,10 +11,8 @@ let manager = {};
 let engineer = {};
 let intern = {}; 
 
-//seperating the functions for readability. 
-//add a manager: 
-function addManager() {
-    inquirer.prompt([
+//inquirer 
+inquirer.prompt([
         {
             type: "input", 
             message: "Please enter a team manager's name. ",
@@ -45,124 +43,133 @@ function addManager() {
     .then((data) => {
         manager = new Manager(`${data.managerName}`, parseInt(`${data.managerID}`), `${data.managerEmail}`, parseInt(`${data.managerOfficeNumber}`)); 
 
-        if(data.nextSteps === "Add a manager") {
-            addManager();
-         };
         if(data.nextSteps === "Add an engineer") {
-           addEngineer();
-        };
-        if(data.nextSteps === "Add an intern") {
-           addIntern();
-        };
-        if(data.nextSteps === "Finish building my team") {
+            inquirer.prompt([
+                {
+                    type: "input", 
+                    message: "Please enter an engineer's name. ",
+                    name: "engineerName"
+                }, 
+                {
+                    type: "input", 
+                    message: "Please enter the engineer's employee ID. ",
+                    name: "engineerID"
+                }, 
+                {
+                    type: "input", 
+                    message: "Please enter the engineer's email address. ",
+                    name: "engineerEmail"
+                },
+                {
+                    type: "input", 
+                    message: "Please enter the engineer's GitHub username.",
+                    name: "engineerGitHub"
+                },
+                // {
+                //     type: "checkbox", 
+                //     message: "What's your next step?",
+                //     name: "nextSteps",
+                //     choices: ["Add a manager", "Add an engineer", "Add an intern", "Finish building my team"]
+                // }, 
+            ])
+            .then((data) => {
+                engineer = new Engineer(`${data.engineerName}`, parseInt(`${data.engineerID}`), `${data.engineerEmail}`, `${data.engineerGitHub}`); 
+            }) 
+        }
+        else if(data.nextSteps === "Add an intern") {
+            inquirer.prompt([
+                {
+                    type: "input", 
+                    message: "Please enter an intern's name. ",
+                    name: "internName"
+                }, 
+                {
+                    type: "input", 
+                    message: "Please enter the intern's employee ID. ",
+                    name: "internID"
+                }, 
+                {
+                    type: "input", 
+                    message: "Please enter the intern's email address. ",
+                    name: "internEmail"
+                },
+                {
+                    type: "input", 
+                    message: "Please enter the intern's school.",
+                    name: "internSchool"
+                },
+                // {
+                //     type: "checkbox", 
+                //     message: "What's your next step?",
+                //     name: "nextSteps",
+                //     choices: ["Add an engineer", "Add an intern", "Finish building my team"]
+                // }, 
+            ])
+            .then((data) => {
+                intern = new Intern(`${data.internName}`, parseInt(`${data.internID}`), `${data.internEmail}`, `${data.internSchool}`); 
+            }); 
+        }
+        else if(data.nextSteps === "Finish building my team") {
             return "Thank you for entering the information. "
         };
-        
-        // return manager; 
     }); 
-}
 
 //add an engineer: 
-function addEngineer() {
-    inquirer.prompt([
-        {
-            type: "input", 
-            message: "Please enter an engineer's name. ",
-            name: "engineerName"
-        }, 
-        {
-            type: "input", 
-            message: "Please enter the engineer's employee ID. ",
-            name: "engineerID"
-        }, 
-        {
-            type: "input", 
-            message: "Please enter the engineer's email address. ",
-            name: "engineerEmail"
-        },
-        {
-            type: "input", 
-            message: "Please enter the engineer's GitHub username.",
-            name: "engineerGitHub"
-        },
-        {
-            type: "checkbox", 
-            message: "What's your next step?",
-            name: "nextSteps",
-            choices: ["Add a manager", "Add an engineer", "Add an intern", "Finish building my team"]
-        }, 
-    ])
-    .then((data) => {
-        if(data.nextSteps === "Add a manager") {
-            addManager();
-        };
-        if(data.nextSteps === "Add an engineer") {
-           addEngineer();
-        };
-        if(data.nextSteps === "Add an intern") {
-           addIntern();
-        };
-        if(data.nextSteps === "Finish building my team") {
-            return "Thank you for entering the information. "
-        };
+// function addEngineer() {
+    
+// }; 
 
-        engineer = new Engineer(`${data.engineerName}`, `${data.engineerID}`, `${data.engineerEmail}`, `${data.engineerGitHub}`); 
+// function addIntern() {
+//     inquirer.prompt([
+//         {
+//             type: "input", 
+//             message: "Please enter an intern's name. ",
+//             name: "internName"
+//         }, 
+//         {
+//             type: "input", 
+//             message: "Please enter the intern's employee ID. ",
+//             name: "internID"
+//         }, 
+//         {
+//             type: "input", 
+//             message: "Please enter the intern's email address. ",
+//             name: "internEmail"
+//         },
+//         {
+//             type: "input", 
+//             message: "Please enter the intern's school.",
+//             name: "internSchool"
+//         },
+//         {
+//             type: "checkbox", 
+//             message: "What's your next step?",
+//             name: "nextSteps",
+//             choices: ["Add an engineer", "Add an intern", "Finish building my team"]
+//         }, 
+//     ])
+//     .then((data) => {
+//         if(data.nextSteps === "Add a manager") {
+//             addManager();
+//         };
+//         if(data.nextSteps === "Add an engineer") {
+//            addEngineer();
+//         };
+//         if(data.nextSteps === "Add an intern") {
+//            addIntern();
+//         };
+//         if(data.nextSteps === "Finish building my team") {
+//             return "Thank you for entering the information. "
+//         };
+
+//         intern = new Intern(`${data.internName}`, `${data.internID}`, `${data.internEmail}`, `${data.internSchool}`); 
         
-        // return engineer; 
-    }) 
-}; 
+//         // return intern; 
+//     }); 
+// }
 
-function addIntern() {
-    inquirer.prompt([
-        {
-            type: "input", 
-            message: "Please enter an intern's name. ",
-            name: "internName"
-        }, 
-        {
-            type: "input", 
-            message: "Please enter the intern's employee ID. ",
-            name: "internID"
-        }, 
-        {
-            type: "input", 
-            message: "Please enter the intern's email address. ",
-            name: "internEmail"
-        },
-        {
-            type: "input", 
-            message: "Please enter the intern's school.",
-            name: "internSchool"
-        },
-        {
-            type: "checkbox", 
-            message: "What's your next step?",
-            name: "nextSteps",
-            choices: ["Add an engineer", "Add an intern", "Finish building my team"]
-        }, 
-    ])
-    .then((data) => {
-        if(data.nextSteps === "Add a manager") {
-            addManager();
-        };
-        if(data.nextSteps === "Add an engineer") {
-           addEngineer();
-        };
-        if(data.nextSteps === "Add an intern") {
-           addIntern();
-        };
-        if(data.nextSteps === "Finish building my team") {
-            return "Thank you for entering the information. "
-        };
-
-        intern = new Intern(`${data.internName}`, `${data.internID}`, `${data.internEmail}`, `${data.internSchool}`); 
-        
-        // return intern; 
-    }); 
-}
-
-//calling functions: 
-addManager();
+// //calling functions: 
+// addManager();
 // addEngineer();
 // addIntern();
 
