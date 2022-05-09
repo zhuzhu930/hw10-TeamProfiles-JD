@@ -5,6 +5,9 @@ const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
+const { mainModule } = require('process');
+
+let cards = []; 
 
 inquirer.prompt([
     {
@@ -102,18 +105,24 @@ inquirer.prompt([
         }
     })
 
-    const manager = new Manager(`${data.managerName}`, `${data.managerID}`, `${data.managerEmail}`, `${data.managerOfficeNumber}`)
-    const managerCard = `<div class="card" style="width: 18rem">
-    <div class="card-body">
-      <h5 class="card-title employeeName">${data.managerName}</h5>
-      <p class="card-text employeeTitle">Manager</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">ID:</li>
-      <li class="list-group-item">
-        Email: <a href="mailto:email">Email Address</a>
-      </li>
-      <li class="list-group-item">Office number:</li>
-    </ul>
-  </div>`
-})
+    const manager = new Manager(`${data.managerName}`, `${data.managerID}`, `${data.managerEmail}`, `${data.managerOfficeNumber}`);
+    cards = cards.push(manager); 
+    const node = document.createElement("div");
+    const nodeHTML = 
+        `<div class="card" style="width: 18rem">
+            <div class="card-body">
+            <h5 class="card-title employeeName">${manager.managerName}</h5>
+            <p class="card-text employeeTitle">${manager.getRole()}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: ${manager.managerID}</li>
+            <li class="list-group-item">
+                Email: <a href="mailto:${manager.managerEmail}">${manager.managerEmail}</a>
+            </li>
+            <li class="list-group-item">Office number: ${manager.managerOfficeNumber}</li>
+            </ul>
+        </div>`;
+    
+    node.append(nodeHTML); 
+    
+}); 
