@@ -53,6 +53,10 @@ function addManager() {
         if(data.nextSteps === "Finish building my team") {
             return "Thank you for entering the information. "
         };
+        
+        const manager = new Manager(`${data.managerName}`, `${data.managerID}`, `${data.managerEmail}`, `${data.managerOfficeNumber}`); 
+        
+        return manager; 
 }); 
 
 
@@ -99,6 +103,10 @@ function addEngineer() {
         if(data.nextSteps === "Finish building my team") {
             return "Thank you for entering the information. "
         };
+
+        const engineer = new Engineer(`${data.engineerName}`, `${data.engineerID}`, `${data.engineerEmail}`, `${data.engineerGitHub}`); 
+        
+        return engineer; 
 }); 
 
 
@@ -144,11 +152,15 @@ function addIntern() {
         if(data.nextSteps === "Finish building my team") {
             return "Thank you for entering the information. "
         };
+
+        const intern = new Intern(`${data.internName}`, `${data.internID}`, `${data.internEmail}`, `${data.internSchool}`); 
+        
+        return intern; 
 }); 
 
 
-    const manager = new Manager(`${data.managerName}`, `${data.managerID}`, `${data.managerEmail}`, `${data.managerOfficeNumber}`);
-    cards = cards.push(manager); 
+    // const manager = new Manager(`${data.managerName}`, `${data.managerID}`, `${data.managerEmail}`, `${data.managerOfficeNumber}`);
+    // cards = cards.push(manager); 
     const node = document.createElement("div");
     const nodeHTML = 
         `<div class="card" style="width: 18rem">
@@ -165,6 +177,4 @@ function addIntern() {
             </ul>
         </div>`;
     
-    node.append(nodeHTML); 
-    
-}); 
+    node.append(nodeHTML)
