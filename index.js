@@ -5,7 +5,7 @@ const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
-const { mainModule } = require('process');
+// const { mainModule } = require('process');
 
 let manager = {};
 let engineer = {};
@@ -43,7 +43,8 @@ function addManager() {
         }, 
     ])
     .then((data) => {
-        manager = new Manager(`${data.managerName}`, parseInt(`${data.managerID}`), `${data.managerEmail}`, parseInt(`${data.managerOfficeNumber}`)); 
+        manager = new Manager(
+            data.managerName, data.managerID, data.managerEmail, data.managerOfficeNumber); 
 
         if(data.nextSteps === "Add a manager") {
             addManager();
@@ -106,7 +107,7 @@ function addEngineer() {
             return "Thank you for entering the information. "
         };
 
-        engineer = new Engineer(`${data.engineerName}`, `${data.engineerID}`, `${data.engineerEmail}`, `${data.engineerGitHub}`); 
+        engineer = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGitHub); 
         
         // return engineer; 
     }) 
@@ -155,14 +156,14 @@ function addIntern() {
             return "Thank you for entering the information. "
         };
 
-        intern = new Intern(`${data.internName}`, `${data.internID}`, `${data.internEmail}`, `${data.internSchool}`); 
+        intern = new Intern(data.internName, data.internID, data.internEmail, data.internSchool); 
         
         // return intern; 
     }); 
 }
 
 //calling functions: 
-addManager();
+
 // addEngineer();
 // addIntern();
 
@@ -327,3 +328,4 @@ fs.writeFile(`/dist/${filenameCSS}`, css, (err) =>
     err ? console.log(err) : console.log("CSS generated successfully")
 );
 
+addManager();
