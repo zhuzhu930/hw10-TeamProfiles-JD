@@ -174,7 +174,7 @@ function addIntern() {
             `<div class="card" style="width: 18rem">
                 <div class="card-body">
                 <h5 class="card-title employeeName">${manager.name}</h5>
-                <p class="card-text employeeTitle">${manager.getRole()}</p>
+                <p class="card-text employeeTitle">${manager.getRole}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${manager.id}</li>
@@ -194,7 +194,7 @@ function addIntern() {
             `<div class="card" style="width: 18rem">
                 <div class="card-body">
                 <h5 class="card-title employeeName">${engineer.name}</h5>
-                <p class="card-text employeeTitle">${engineer.getRole()}</p>
+                <p class="card-text employeeTitle">${engineer.getRole}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${engineer.id}</li>
@@ -216,7 +216,7 @@ function addIntern() {
             `<div class="card" style="width: 18rem">
                 <div class="card-body">
                 <h5 class="card-title employeeName">${intern.name}</h5>
-                <p class="card-text employeeTitle">${intern.getRole()}</p>
+                <p class="card-text employeeTitle">${intern.getRole}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${intern.id}</li>
@@ -271,7 +271,7 @@ const html = `<!DOCTYPE html>
   </body>
 </html>`
 
-fs.writeFile(`/dist/${fileNameHTML}`, html, (err) => 
+fs.writeFile(`dist/${fileNameHTML}`, html, (err) => 
     err ? console.log(err) : console.log("HTML generated successfully")
 );
 
@@ -324,7 +324,7 @@ header h1 {
   text-align: left;
 }`
 
-fs.writeFile(`/dist/${filenameCSS}`, css, (err) => 
+fs.writeFile(`dist/${filenameCSS}`, css, (err) => 
     err ? console.log(err) : console.log("CSS generated successfully")
 );
 

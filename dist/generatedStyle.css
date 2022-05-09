@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Babylonica&family=Pacifico&family=Poppins:ital,wght@0,200;0,300;1,400&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: "Babylonica", cursive;
+  font-family: "Pacifico", cursive;
+  font-family: "Poppins", sans-serif;
+  background-color: lightgrey;
+}
+
+header {
+  margin: 0;
+  padding: 50px;
+  background: linear-gradient(#e66465, #9198e5);
+}
+
+header h1 {
+  font-weight: bolder;
+}
+
+/* .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.card-body {
+  background-color: royalblue;
+  font-size: large;
+  color: white;
+}
+
+.card {
+  padding: 0px;
+  margin: 30px;
+}
+
+.list-group {
+  text-align: left;
+}
