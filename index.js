@@ -1,4 +1,4 @@
-const inquirer = require('inquire');
+const inquirer = require("inquirer");
 const fs = require('fs');
 
 const Employee = require('./lib/Employee');
@@ -161,6 +161,11 @@ function addIntern() {
     }); 
 }
 
+//calling functions: 
+addManager();
+// addEngineer();
+// addIntern();
+
 //construct div html 
 // function constructManager() {
     // const managerNode = document.createElement("div");
@@ -250,7 +255,7 @@ const html = `<!DOCTYPE html>
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="cssSample.css" />
+    <link rel="stylesheet" href="generatedStyle.css" />
     <title>Team Profiles</title>
   </head>
   <body>
