@@ -96,7 +96,7 @@ inquirer.prompt([
                 ])
                 .then((data) => {
                     if(data.nextSteps === "Finish building my team") {
-                        console.log("Thank you for entering the information. ");
+                        return "Thank you for entering the information. ";
                 }
             })
         }
@@ -116,4 +116,4 @@ inquirer.prompt([
       <li class="list-group-item">Office number:</li>
     </ul>
   </div>`
-});
+})
