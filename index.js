@@ -61,6 +61,7 @@ function addManager() {
         
         // return manager; 
     }); 
+    buildHTMLCSS();
 }
 
 //add an engineer: 
@@ -170,8 +171,10 @@ function addIntern() {
 //construct div html 
 // function constructManager() {
     // const managerNode = document.createElement("div");
+
+function buildHTMLCSS() {
         const managerNodeHTML = 
-            `<div class="card" style="width: 18rem">
+            `
                 <div class="card-body">
                 <h5 class="card-title employeeName">${manager.name}</h5>
                 <p class="card-text employeeTitle">${manager.getRole}</p>
@@ -183,7 +186,7 @@ function addIntern() {
                 </li>
                 <li class="list-group-item">Office number: ${manager.officeNumber}</li>
                 </ul>
-            </div>`;
+            `;
         
     // managerNode.append(managerNodeHTML); 
 // }; 
@@ -191,7 +194,7 @@ function addIntern() {
 // function constructEngineer() {
     // const engineerNode = document.createElement("div");
         const engineerNodeHTML = 
-            `<div class="card" style="width: 18rem">
+            `
                 <div class="card-body">
                 <h5 class="card-title employeeName">${engineer.name}</h5>
                 <p class="card-text employeeTitle">${engineer.getRole}</p>
@@ -205,7 +208,7 @@ function addIntern() {
                     Github: <a href="${engineer.github}">${engineer.github}</a>
                 </li>
                 </ul>
-            </div>`;
+            `;
         
     // engineerNode.append(engineerNodeHTML); 
 // }; 
@@ -213,7 +216,7 @@ function addIntern() {
 // function constructIntern() {
     // const internNode = document.createElement("div");
         const internNodeHTML = 
-            `<div class="card" style="width: 18rem">
+            `
                 <div class="card-body">
                 <h5 class="card-title employeeName">${intern.name}</h5>
                 <p class="card-text employeeTitle">${intern.getRole}</p>
@@ -227,7 +230,7 @@ function addIntern() {
                     School: ${intern.school}
                 </li>
                 </ul>
-            </div>`;
+            `;
         
     // internNode.append(internNodeHTML); 
 // }
@@ -264,9 +267,9 @@ const html = `<!DOCTYPE html>
       <h1>My Team</h1>
     </header>
     <main class="container row">
-        <div>${managerNodeHTML}</div>
-        <div>${engineerNodeHTML}</div>
-        <div>${internNodeHTML}</div>
+        <div class="card" style="width: 18rem">${managerNodeHTML}</div>
+        <div class="card" style="width: 18rem">${engineerNodeHTML}</div>
+        <div class="card" style="width: 18rem">${internNodeHTML}</div>
     </main>
   </body>
 </html>`
@@ -328,4 +331,7 @@ fs.writeFile(`dist/${filenameCSS}`, css, (err) =>
     err ? console.log(err) : console.log("CSS generated successfully")
 );
 
+}
+
 addManager();
+// buildHTMLCSS();
