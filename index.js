@@ -59,8 +59,8 @@ function addManager() {
         manager = new Manager(`${data.managerName}`, `${data.managerID}`, `${data.managerEmail}`, `${data.managerOfficeNumber}`); 
         
         // return manager; 
-}); 
-
+    }); 
+}
 
 //add an engineer: 
 function addEngineer() {
@@ -109,8 +109,8 @@ function addEngineer() {
         engineer = new Engineer(`${data.engineerName}`, `${data.engineerID}`, `${data.engineerEmail}`, `${data.engineerGitHub}`); 
         
         // return engineer; 
-}); 
-
+    }) 
+}; 
 
 function addIntern() {
     inquirer.prompt([
@@ -158,11 +158,12 @@ function addIntern() {
         intern = new Intern(`${data.internName}`, `${data.internID}`, `${data.internEmail}`, `${data.internSchool}`); 
         
         // return intern; 
-}); 
+    }); 
+}
 
 //construct div html 
-function constructManager() {
-    const managerNode = document.createElement("div");
+// function constructManager() {
+    // const managerNode = document.createElement("div");
         const managerNodeHTML = 
             `<div class="card" style="width: 18rem">
                 <div class="card-body">
@@ -178,11 +179,11 @@ function constructManager() {
                 </ul>
             </div>`;
         
-    managerNode.append(managerNodeHTML); 
-}; 
+    // managerNode.append(managerNodeHTML); 
+// }; 
 
-function constructEngineer() {
-    const engineerNode = document.createElement("div");
+// function constructEngineer() {
+    // const engineerNode = document.createElement("div");
         const engineerNodeHTML = 
             `<div class="card" style="width: 18rem">
                 <div class="card-body">
@@ -200,11 +201,11 @@ function constructEngineer() {
                 </ul>
             </div>`;
         
-    engineerNode.append(engineerNodeHTML); 
-}; 
+    // engineerNode.append(engineerNodeHTML); 
+// }; 
 
-function constructIntern() {
-    const internNode = document.createElement("div");
+// function constructIntern() {
+    // const internNode = document.createElement("div");
         const internNodeHTML = 
             `<div class="card" style="width: 18rem">
                 <div class="card-body">
@@ -222,14 +223,14 @@ function constructIntern() {
                 </ul>
             </div>`;
         
-    internNode.append(internNodeHTML); 
-}
+    // internNode.append(internNodeHTML); 
+// }
 
 
 //construct html file
-function constructHTML() {
+// function constructHTML() {
 
-}
+// }
 
 const fileNameHTML = "generatedHTML.html"; 
 const html = `<!DOCTYPE html>
@@ -257,7 +258,9 @@ const html = `<!DOCTYPE html>
       <h1>My Team</h1>
     </header>
     <main class="container row">
-
+        <div>${managerNodeHTML}</div>
+        <div>${engineerNodeHTML}</div>
+        <div>${internNodeHTML}</div>
     </main>
   </body>
 </html>`
@@ -318,6 +321,4 @@ header h1 {
 fs.writeFile(`/dist/${filenameCSS}`, css, (err) => 
     err ? console.log(err) : console.log("CSS generated successfully")
 );
-
-
 
