@@ -5,7 +5,6 @@ const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
-// const { mainModule } = require('process');
 
 const members = {
     manager: null, 
@@ -14,9 +13,6 @@ const members = {
 }
 
 const memberIdArray = [];
-// let manager = {};
-// let engineer = {};
-// let intern = {}; 
 
 //seperating the functions for readability. 
 //add a manager: 
@@ -52,6 +48,7 @@ function addManager() {
     }); 
 }
 
+//create team members: 
 function creatTeamMembers() {
     inquirer.prompt([
         {
@@ -64,11 +61,9 @@ function creatTeamMembers() {
         console.log(data);
         if(data.nextStep === "Add an engineer") {
            addEngineer()
-        //    break;
         }
         else if(data.nextStep === "Add an intern") {
            addIntern()
-        //    break;
         }
         else if (data.nextStep === "Finish building my team") {
             console.log("Thank you for entering the information. ")
@@ -108,7 +103,7 @@ function addEngineer() {
         creatTeamMembers();
     }); 
 }; 
-
+//add an intern:
 function addIntern() {
     inquirer.prompt([
         {
@@ -141,9 +136,7 @@ function addIntern() {
 }
 
 
-//construct div html 
-// function constructManager() {
-    // const managerNode = document.createElement("div");
+// build the final HTML and CSS
 
 function buildHTMLCSS() {
     //render managerNode
@@ -209,7 +202,7 @@ function buildHTMLCSS() {
             return markup.join(",");
         }
         
-//generate Div's innerHTML
+//generate Main element's innerHTML:
    function generateTeam(members) {
        return `
        ${managerNodeHTML(members.manager)}
@@ -218,7 +211,7 @@ function buildHTMLCSS() {
        `;
    }
 
-//construct html file
+//Construct html file:
 
 const fileNameHTML = "generatedHTML.html"; 
 function html(members) {
@@ -258,7 +251,7 @@ fs.writeFile(`dist/${fileNameHTML}`, html(members), (err) =>
     err ? console.log(err) : console.log("HTML generated successfully")
 );
 
-//construct CSS file
+//Construct CSS file:
 const filenameCSS = "generatedStyle.css"; 
 const css = `@import url("https://fonts.googleapis.com/css2?family=Babylonica&family=Pacifico&family=Poppins:ital,wght@0,200;0,300;1,400&display=swap");
 
@@ -314,4 +307,3 @@ fs.writeFile(`dist/${filenameCSS}`, css, (err) =>
 }
 
 addManager();
-// buildHTMLCSS();
