@@ -71,7 +71,7 @@ function addManager() {
 function creatTeamMembers() {
     inquirer.prompt([
         {
-            type: "list", 
+            type: "checkbox", 
             message: "What's your next step?",
             name: "nextSteps",
             choices: ["Add an engineer", "Add an intern", "Finish building my team"],
@@ -79,17 +79,18 @@ function creatTeamMembers() {
     ]).then((data) => {
         if(data.choices = "Add an engineer") {
            addEngineer();
-           break;
-        };
-        if(data.choices = "Add an intern") {
+        //    break;
+        }
+        else if(data.choices = "Add an intern") {
            addIntern();
-           break;
-        };
-        if(data.choices = "Finish building my team") {
+        //    break;
+        }
+        else if(data.choices = "Finish building my team") {
             return "Thank you for entering the information. "
         };
-        buildHTMLCSS()
+        
     });
+    buildHTMLCSS()
 }
 
 //add an engineer: 
@@ -229,7 +230,7 @@ function buildHTMLCSS() {
                     Github: <a href="${engineer.getGithub()}">${engineer.getGithub()}</a>
                 </li>
                 </ul>
-            `
+                `
             });
             return markup.join(",");
         }
@@ -366,4 +367,3 @@ fs.writeFile(`dist/${filenameCSS}`, css, (err) =>
 }
 
 addManager();
-// buildHTMLCSS();
