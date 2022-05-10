@@ -50,40 +50,31 @@ function addManager() {
         memberIdArray.push(data.managerID);
         creatTeamMembers();
     }); 
-    // buildHTMLCSS();
 }
 
 function creatTeamMembers() {
     inquirer.prompt([
         {
-            type: "checkbox", 
+            type: "list", 
             message: "What's your next step?",
-            name: "nextSteps",
+            name: "nextStep",
             choices: ["Add an engineer", "Add an intern", "Finish building my team"],
         }, 
     ]).then((data) => {
-        if(data.nextSteps = "Add an engineer") {
+        console.log(data);
+        if(data.nextStep === "Add an engineer") {
            addEngineer()
         //    break;
         }
-        else if(data.nextSteps = "Add an intern") {
+        else if(data.nextStep === "Add an intern") {
            addIntern()
         //    break;
         }
-        else {
+        else if (data.nextStep === "Finish building my team") {
             console.log("Thank you for entering the information. ")
-        };
-        // switch (data.choices) {
-        //     case "Add an engineer":
-        //         addEngineer();
-        //         break;
-        //     case "Add an intern":
-        //         addIntern();
-        //         break;
-        //     // default: buildHTMLCSS();
-        // }
-    });
-    buildHTMLCSS()
+            buildHTMLCSS()
+        } 
+    });    
 }
 
 //add an engineer: 
@@ -157,8 +148,7 @@ function addIntern() {
 function buildHTMLCSS() {
     //render managerNode
         const managerNodeHTML = function(manager) {
-            return 
-            `
+            return `<div class="card" style="width: 18rem">
                 <div class="card-body">
                 <h5 class="card-title employeeName">${manager.getName()}</h5>
                 <p class="card-text employeeTitle">${manager.getRole()}</p>
@@ -170,26 +160,28 @@ function buildHTMLCSS() {
                 </li>
                 <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
                 </ul>
+            </div>
             `
         };
         
     //render engineerNode
         const engineerNodeHTML = function(engineers) {
             const markup = engineers.map((engineer) => {
-                return 
-                `<div class="card-body">
-                <h5 class="card-title employeeName">${engineer.getName()}</h5>
-                <p class="card-text employeeTitle">${engineer.getRole()}</p>
+                return `<div class="card" style="width: 18rem">
+                    <div class="card-body">
+                    <h5 class="card-title employeeName">${engineer.getName()}</h5>
+                    <p class="card-text employeeTitle">${engineer.getRole()}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${engineer.getId()}</li>
+                    <li class="list-group-item">
+                        Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a>
+                    </li>
+                    <li class="list-group-item">
+                        Github: <a href="${engineer.getGithub()}">${engineer.getGithub()}</a>
+                    </li>
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${engineer.getId()}</li>
-                <li class="list-group-item">
-                    Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a>
-                </li>
-                <li class="list-group-item">
-                    Github: <a href="${engineer.getGithub()}">${engineer.getGithub()}</a>
-                </li>
-                </ul>
                 `
             });
             return markup.join(",");
@@ -198,68 +190,71 @@ function buildHTMLCSS() {
     //render internNode
         const internNodeHTML = function(interns) {
             const markup = interns.map((intern) => {
-                return 
-                `<div class="card-body">
-                <h5 class="card-title employeeName">${intern.getName()}</h5>
-                <p class="card-text employeeTitle">${intern.getRole()}</p>
+                return `<div class="card" style="width: 18rem">
+                    <div class="card-body">
+                    <h5 class="card-title employeeName">${intern.getName()}</h5>
+                    <p class="card-text employeeTitle">${intern.getRole()}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${intern.getId()}</li>
+                    <li class="list-group-item">
+                        Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a>
+                    </li>
+                    <li class="list-group-item">
+                        School: ${intern.getSchool()}
+                    </li>
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${intern.getId()}</li>
-                <li class="list-group-item">
-                    Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a>
-                </li>
-                <li class="list-group-item">
-                    School: ${intern.getSchool()}
-                </li>
-                </ul>
             `});
             return markup.join(",");
         }
         
 //generate Div's innerHTML
    function generateTeam(members) {
-       return 
-       `
+       return `
        ${managerNodeHTML(members.manager)}
        ${engineerNodeHTML(members.engineers)}
        ${internNodeHTML(members.interns)}
-       `
+       `;
    }
 
 //construct html file
 
 const fileNameHTML = "generatedHTML.html"; 
-const html = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="generatedStyle.css" />
-    <title>Team Profiles</title>
-  </head>
-  <body>
-    <header>
-      <h1>My Team</h1>
-    </header>
-    <main class="container row">
-        <div class="card" style="width: 18rem">${generateTeam(members)}</div>
-    </main>
-  </body>
-</html>`
+function html(members) {
+    return `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+          crossorigin="anonymous"
+        ></script>
+        <link rel="stylesheet" href="generatedStyle.css" />
+        <title>Team Profiles</title>
+      </head>
+      <body>
+        <header>
+          <h1>My Team</h1>
+        </header>
+        <main class="container row">
+            ${generateTeam(members)}
+        </main>
+      </body>
+    </html>`
+} 
 
-fs.writeFile(`dist/${fileNameHTML}`, html, (err) => 
+fs.writeFile(`dist/${fileNameHTML}`, html(members), (err) => 
     err ? console.log(err) : console.log("HTML generated successfully")
 );
 
@@ -319,3 +314,4 @@ fs.writeFile(`dist/${filenameCSS}`, css, (err) =>
 }
 
 addManager();
+// buildHTMLCSS();
