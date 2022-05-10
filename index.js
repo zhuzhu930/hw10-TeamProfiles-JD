@@ -7,9 +7,16 @@ const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 // const { mainModule } = require('process');
 
-let manager = {};
-let engineer = {};
-let intern = {}; 
+const members = {
+    manager: null, 
+    engineers: [],
+    interns: [],
+}
+
+const memberIdArray = [];
+// let manager = {};
+// let engineer = {};
+// let intern = {}; 
 
 //seperating the functions for readability. 
 //add a manager: 
@@ -35,33 +42,54 @@ function addManager() {
             message: "Please enter the manager's office number.",
             name: "managerOfficeNumber"
         },
-        {
-            type: "checkbox", 
-            message: "What's your next step?",
-            name: "nextSteps",
-            choices: ["Add a manager", "Add an engineer", "Add an intern", "Finish building my team"]
-        }, 
     ])
     .then((data) => {
-        manager = new Manager(
+        const manager = new Manager(
             data.managerName, data.managerID, data.managerEmail, data.managerOfficeNumber); 
+        members.manager = manager; 
+        memberIdArray.push(data.managerID);
+        creatTeamMembers();
 
-        if(data.nextSteps === "Add a manager") {
-            addManager();
-         };
-        if(data.nextSteps === "Add an engineer") {
-           addEngineer();
-        };
-        if(data.nextSteps === "Add an intern") {
-           addIntern();
-        };
-        if(data.nextSteps === "Finish building my team") {
-            return "Thank you for entering the information. "
-        };
+        // if(data.nextSteps === "Add a manager") {
+        //     addManager();
+        //  };
+        // if(data.nextSteps === "Add an engineer") {
+        //    addEngineer();
+        // };
+        // if(data.nextSteps === "Add an intern") {
+        //    addIntern();
+        // };
+        // if(data.nextSteps === "Finish building my team") {
+        //     return "Thank you for entering the information. "
+        // };
         
         // return manager; 
     }); 
-    buildHTMLCSS();
+    // buildHTMLCSS();
+}
+
+function creatTeamMembers() {
+    inquirer.prompt([
+        {
+            type: "list", 
+            message: "What's your next step?",
+            name: "nextSteps",
+            choices: ["Add an engineer", "Add an intern", "Finish building my team"],
+        }, 
+    ]).then((data) => {
+        if(data.choices = "Add an engineer") {
+           addEngineer();
+           break;
+        };
+        if(data.choices = "Add an intern") {
+           addIntern();
+           break;
+        };
+        if(data.choices = "Finish building my team") {
+            return "Thank you for entering the information. "
+        };
+        buildHTMLCSS()
+    });
 }
 
 //add an engineer: 
@@ -87,31 +115,19 @@ function addEngineer() {
             message: "Please enter the engineer's GitHub username.",
             name: "engineerGitHub"
         },
-        {
-            type: "checkbox", 
-            message: "What's your next step?",
-            name: "nextSteps",
-            choices: ["Add a manager", "Add an engineer", "Add an intern", "Finish building my team"]
-        }, 
+        // {
+        //     type: "checkbox", 
+        //     message: "What's your next step?",
+        //     name: "nextSteps",
+        //     choices: ["Add a manager", "Add an engineer", "Add an intern", "Finish building my team"]
+        // }, 
     ])
     .then((data) => {
-        if(data.nextSteps === "Add a manager") {
-            addManager();
-        };
-        if(data.nextSteps === "Add an engineer") {
-           addEngineer();
-        };
-        if(data.nextSteps === "Add an intern") {
-           addIntern();
-        };
-        if(data.nextSteps === "Finish building my team") {
-            return "Thank you for entering the information. "
-        };
-
-        engineer = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGitHub); 
-        
-        // return engineer; 
-    }) 
+        const engineer = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGitHub); 
+        members.engineers.push(engineer); 
+        memberIdArray.push(data.engineerID)
+        creatTeamMembers();
+    }); 
 }; 
 
 function addIntern() {
@@ -136,29 +152,31 @@ function addIntern() {
             message: "Please enter the intern's school.",
             name: "internSchool"
         },
-        {
-            type: "checkbox", 
-            message: "What's your next step?",
-            name: "nextSteps",
-            choices: ["Add an engineer", "Add an intern", "Finish building my team"]
-        }, 
+        // {
+        //     type: "checkbox", 
+        //     message: "What's your next step?",
+        //     name: "nextSteps",
+        //     choices: ["Add an engineer", "Add an intern", "Finish building my team"]
+        // }, 
     ])
     .then((data) => {
-        if(data.nextSteps === "Add a manager") {
-            addManager();
-        };
-        if(data.nextSteps === "Add an engineer") {
-           addEngineer();
-        };
-        if(data.nextSteps === "Add an intern") {
-           addIntern();
-        };
-        if(data.nextSteps === "Finish building my team") {
-            return "Thank you for entering the information. "
-        };
+        // if(data.nextSteps === "Add a manager") {
+        //     addManager();
+        // };
+        // if(data.nextSteps === "Add an engineer") {
+        //    addEngineer();
+        // };
+        // if(data.nextSteps === "Add an intern") {
+        //    addIntern();
+        // };
+        // if(data.nextSteps === "Finish building my team") {
+        //     return "Thank you for entering the information. "
+        // };
 
-        intern = new Intern(data.internName, data.internID, data.internEmail, data.internSchool); 
-        
+        const intern = new Intern(data.internName, data.internID, data.internEmail, data.internSchool); 
+        members.interns.push(intern);
+        memberIdArray.push(data.internID);
+        creatTeamMembers();
         // return intern; 
     }); 
 }
@@ -173,68 +191,84 @@ function addIntern() {
     // const managerNode = document.createElement("div");
 
 function buildHTMLCSS() {
-        const managerNodeHTML = 
+        const managerNodeHTML = function(manager) {
+            return 
             `
                 <div class="card-body">
-                <h5 class="card-title employeeName">${manager.name}</h5>
-                <p class="card-text employeeTitle">${manager.getRole}</p>
+                <h5 class="card-title employeeName">${manager.getName()}</h5>
+                <p class="card-text employeeTitle">${manager.getRole()}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${manager.id}</li>
+                <li class="list-group-item">ID: ${manager.getId()}</li>
                 <li class="list-group-item">
-                    Email: <a href="mailto:${manager.email}">${manager.email}</a>
+                    Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a>
                 </li>
-                <li class="list-group-item">Office number: ${manager.officeNumber}</li>
+                <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
                 </ul>
-            `;
+            `
+        };
         
     // managerNode.append(managerNodeHTML); 
 // }; 
 
 // function constructEngineer() {
     // const engineerNode = document.createElement("div");
-        const engineerNodeHTML = 
-            `
-                <div class="card-body">
-                <h5 class="card-title employeeName">${engineer.name}</h5>
-                <p class="card-text employeeTitle">${engineer.getRole}</p>
+        const engineerNodeHTML = function(engineers) {
+            const markup = engineers.map((engineer) => {
+                return 
+                `<div class="card-body">
+                <h5 class="card-title employeeName">${engineer.getName()}</h5>
+                <p class="card-text employeeTitle">${engineer.getRole()}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${engineer.id}</li>
+                <li class="list-group-item">ID: ${engineer.getId()}</li>
                 <li class="list-group-item">
-                    Email: <a href="mailto:${engineer.email}">${engineer.email}</a>
+                    Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a>
                 </li>
                 <li class="list-group-item">
-                    Github: <a href="${engineer.github}">${engineer.github}</a>
+                    Github: <a href="${engineer.getGithub()}">${engineer.getGithub()}</a>
                 </li>
                 </ul>
-            `;
+            `
+            });
+            return markup.join(",");
+        }
         
     // engineerNode.append(engineerNodeHTML); 
 // }; 
 
 // function constructIntern() {
     // const internNode = document.createElement("div");
-        const internNodeHTML = 
-            `
-                <div class="card-body">
-                <h5 class="card-title employeeName">${intern.name}</h5>
-                <p class="card-text employeeTitle">${intern.getRole}</p>
+        const internNodeHTML = function(interns) {
+            const markup = interns.map((intern) => {
+                return 
+                `<div class="card-body">
+                <h5 class="card-title employeeName">${intern.getName()}</h5>
+                <p class="card-text employeeTitle">${intern.getRole()}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${intern.id}</li>
+                <li class="list-group-item">ID: ${intern.getId()}</li>
                 <li class="list-group-item">
-                    Email: <a href="mailto:${intern.email}">${intern.email}</a>
+                    Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a>
                 </li>
                 <li class="list-group-item">
-                    School: ${intern.school}
+                    School: ${intern.getSchool()}
                 </li>
                 </ul>
-            `;
+            `});
+            return markup.join(",");
+        }
         
     // internNode.append(internNodeHTML); 
 // }
-
+   const generateTeam = function(members) {
+       return 
+       `
+       ${managerNodeHTML(members.manager)}
+       ${engineerNodeHTML(members.engineers)}
+       ${internNodeHTML(members.interns)}
+       `
+   }
 
 //construct html file
 // function constructHTML() {
@@ -267,9 +301,7 @@ const html = `<!DOCTYPE html>
       <h1>My Team</h1>
     </header>
     <main class="container row">
-        <div class="card" style="width: 18rem">${managerNodeHTML}</div>
-        <div class="card" style="width: 18rem">${engineerNodeHTML}</div>
-        <div class="card" style="width: 18rem">${internNodeHTML}</div>
+        <div class="card" style="width: 18rem">${generateTeam(members)}</div>
     </main>
   </body>
 </html>`
