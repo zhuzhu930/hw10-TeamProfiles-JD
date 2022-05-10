@@ -49,21 +49,6 @@ function addManager() {
         members.manager = manager; 
         memberIdArray.push(data.managerID);
         creatTeamMembers();
-
-        // if(data.nextSteps === "Add a manager") {
-        //     addManager();
-        //  };
-        // if(data.nextSteps === "Add an engineer") {
-        //    addEngineer();
-        // };
-        // if(data.nextSteps === "Add an intern") {
-        //    addIntern();
-        // };
-        // if(data.nextSteps === "Finish building my team") {
-        //     return "Thank you for entering the information. "
-        // };
-        
-        // return manager; 
     }); 
     // buildHTMLCSS();
 }
@@ -77,16 +62,16 @@ function creatTeamMembers() {
             choices: ["Add an engineer", "Add an intern", "Finish building my team"],
         }, 
     ]).then((data) => {
-        if(data.choices = "Add an engineer") {
-           addEngineer();
-        //    break;
+        if(data.choice = "Add an engineer") {
+           addEngineer()
+        //    break
         }
-        else if(data.choices = "Add an intern") {
-           addIntern();
-        //    break;
+        else if(data.choice = "Add an intern") {
+           addIntern()
+        //    break
         }
-        else if(data.choices = "Finish building my team") {
-            return "Thank you for entering the information. "
+        else {
+            console.log("Thank you for entering the information. ")
         };
         
     });
@@ -116,12 +101,6 @@ function addEngineer() {
             message: "Please enter the engineer's GitHub username.",
             name: "engineerGitHub"
         },
-        // {
-        //     type: "checkbox", 
-        //     message: "What's your next step?",
-        //     name: "nextSteps",
-        //     choices: ["Add a manager", "Add an engineer", "Add an intern", "Finish building my team"]
-        // }, 
     ])
     .then((data) => {
         const engineer = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGitHub); 
@@ -153,45 +132,22 @@ function addIntern() {
             message: "Please enter the intern's school.",
             name: "internSchool"
         },
-        // {
-        //     type: "checkbox", 
-        //     message: "What's your next step?",
-        //     name: "nextSteps",
-        //     choices: ["Add an engineer", "Add an intern", "Finish building my team"]
-        // }, 
     ])
     .then((data) => {
-        // if(data.nextSteps === "Add a manager") {
-        //     addManager();
-        // };
-        // if(data.nextSteps === "Add an engineer") {
-        //    addEngineer();
-        // };
-        // if(data.nextSteps === "Add an intern") {
-        //    addIntern();
-        // };
-        // if(data.nextSteps === "Finish building my team") {
-        //     return "Thank you for entering the information. "
-        // };
-
         const intern = new Intern(data.internName, data.internID, data.internEmail, data.internSchool); 
         members.interns.push(intern);
         memberIdArray.push(data.internID);
         creatTeamMembers();
-        // return intern; 
     }); 
 }
 
-//calling functions: 
-
-// addEngineer();
-// addIntern();
 
 //construct div html 
 // function constructManager() {
     // const managerNode = document.createElement("div");
 
 function buildHTMLCSS() {
+    //render managerNode
         const managerNodeHTML = function(manager) {
             return 
             `
@@ -209,11 +165,7 @@ function buildHTMLCSS() {
             `
         };
         
-    // managerNode.append(managerNodeHTML); 
-// }; 
-
-// function constructEngineer() {
-    // const engineerNode = document.createElement("div");
+    //render engineerNode
         const engineerNodeHTML = function(engineers) {
             const markup = engineers.map((engineer) => {
                 return 
@@ -235,11 +187,7 @@ function buildHTMLCSS() {
             return markup.join(",");
         }
         
-    // engineerNode.append(engineerNodeHTML); 
-// }; 
-
-// function constructIntern() {
-    // const internNode = document.createElement("div");
+    //render internNode
         const internNodeHTML = function(interns) {
             const markup = interns.map((intern) => {
                 return 
@@ -260,9 +208,8 @@ function buildHTMLCSS() {
             return markup.join(",");
         }
         
-    // internNode.append(internNodeHTML); 
-// }
-   const generateTeam = function(members) {
+//generate Div's innerHTML
+   function generateTeam(members) {
        return 
        `
        ${managerNodeHTML(members.manager)}
@@ -272,9 +219,6 @@ function buildHTMLCSS() {
    }
 
 //construct html file
-// function constructHTML() {
-
-// }
 
 const fileNameHTML = "generatedHTML.html"; 
 const html = `<!DOCTYPE html>
