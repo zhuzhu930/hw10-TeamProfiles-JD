@@ -62,20 +62,28 @@ function creatTeamMembers() {
             choices: ["Add an engineer", "Add an intern", "Finish building my team"],
         }, 
     ]).then((data) => {
-        if(data.choice = "Add an engineer") {
-           addEngineer()
-        //    break
+        // if(data.choice = "Add an engineer") {
+        //    addEngineer()
+        // //    break
+        // }
+        // else if(data.choice = "Add an intern") {
+        //    addIntern()
+        // //    break
+        // }
+        // else {
+        //     console.log("Thank you for entering the information. ")
+        // };
+        switch (data.choices) {
+            case "Add an engineer":
+                addEngineer();
+                break;
+            case "Add an intern":
+                addIntern();
+                break;
+            default: buildHTMLCSS();
         }
-        else if(data.choice = "Add an intern") {
-           addIntern()
-        //    break
-        }
-        else {
-            console.log("Thank you for entering the information. ")
-        };
-        
     });
-    buildHTMLCSS()
+    // buildHTMLCSS()
 }
 
 //add an engineer: 
