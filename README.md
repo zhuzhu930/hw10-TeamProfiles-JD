@@ -92,8 +92,11 @@
 
     - This app and Github repo is open to the public to contribute.
 
-## Demo URL
+## URLs
 
     Please feel free to take a look at the demo video of this app:
 
     [Demo link](https://drive.google.com/file/d/1PMw6HrfYfTd0uDhtfg4vlzsGgRSwDm-5/view)
+
+    Github Repo:
+    [Github](https://github.com/zhuzhu930/hw10-TeamProfiles-JD)
