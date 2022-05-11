@@ -96,7 +96,7 @@
 
     Please feel free to take a look at the demo video of this app:
 
-    [Demo link](https://drive.google.com/file/d/1PMw6HrfYfTd0uDhtfg4vlzsGgRSwDm-5/view)
+    [Demo link](https://drive.google.com/file/d/1clwf5e3Hv1WN8VFfrRjZh0HTQTrTzKyw/view?usp=sharing)
 
     Github Repo:
     [Github](https://github.com/zhuzhu930/hw10-TeamProfiles-JD)
